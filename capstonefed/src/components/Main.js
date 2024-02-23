@@ -8,26 +8,15 @@ import Booking from "./Booking";
 
 const Main = () => {
 
-
-    const seededRandom = function (seed) {
-        var m = 2**35 - 31;
-        var a = 185852;
-        var s = seed % m;
-        return function () {
-            return (s = s * a % m) / m;
-        };
-    }
-
     const fetchAPI = function(date) {
         let result = [];
-        let random = seededRandom(date.getDate());
-
         for(let i = 17; i <= 23; i++) {
-            if(random() < 0.5) {
-                result.push(i + ':00');
-            }
-            if(random() < 0.5) {
-                result.push(i + ':30');
+            for (let j = 0; j <= 1; j++) {
+                if(j === 0) {
+                    result.push(i + ':00');
+                } else {
+                    result.push(i + ':30');
+                }
             }
         }
         return result;
@@ -49,16 +38,6 @@ const Main = () => {
         }
     }
 
-
-/*     return (
-        <main className="main">
-            <Routes>
-                <Route path='/' element = {<Header/>}/>
-                <Route path='/booking' element = {<Booking availableTimes={state} dispatch={dispatch} submitform={submitForm}/>} />
-                <Route path='/confirmed' element = {<BookingConfirmation/>} />
-            </Routes>
-        </main>
-    ) */
 
     return(
         <main className="main">
